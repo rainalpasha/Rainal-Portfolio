@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --text: #1a1a1a;
+      --text-muted: #6b6b6b;
+      --text-hint: #999;
+      --border: rgba(0,0,0,0.12);
+      --border-hover: rgba(0,0,0,0.25);
+      --radius: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg-secondary: #242424;
+        --text: #f0f0f0;
+        --text-muted: #aaa;
+        --text-hint: #666;
+        --border: rgba(255,255,255,0.12);
+        --border-hover: rgba(255,255,255,0.25);
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout ── */
+    .container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Nav ── */
+    header {
+      border-bottom: 0.5px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 15px; font-weight: 500; }
+    nav { display: flex; gap: 1.5rem; }
+    nav a { font-size: 14px; color: var(--text-muted); transition: color 0.15s; }
+    nav a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero { padding: 5rem 0 4rem; border-bottom: 0.5px solid var(--border); }
+    .hero h1 { font-size: 36px; font-weight: 500; margin-bottom: 1rem; line-height: 1.25; }
+    .hero p { font-size: 17px; color: var(--text-muted); max-width: 520px; margin-bottom: 1.75rem; }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      padding: 9px 20px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      border: 0.5px solid var(--border-hover);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn:hover { background: var(--bg-secondary); }
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: transparent;
+    }
+    .btn-primary:hover { opacity: 0.88; background: var(--text); }
+
+    /* ── Sections ── */
+    section { padding: 3.5rem 0; border-bottom: 0.5px solid var(--border); }
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-hint);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Projects ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .project-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      transition: border-color 0.15s;
+    }
+    .project-card:hover { border-color: var(--border-hover); }
+    .card-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .tag-blue  { background: #E6F1FB; color: #0C447C; }
+    .tag-teal  { background: #E1F5EE; color: #085041; }
+    .tag-purple{ background: #EEEDFE; color: #3C3489; }
+    @media (prefers-color-scheme: dark) {
+      .tag-blue  { background: #0C447C; color: #B5D4F4; }
+      .tag-teal  { background: #085041; color: #9FE1CB; }
+      .tag-purple{ background: #3C3489; color: #CECBF6; }
+    }
+    .project-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+    .project-card p  { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+    .card-links { display: flex; gap: 8px; }
+    .card-links a {
+      font-size: 12px;
+      color: var(--text-muted);
+      border: 0.5px solid var(--border);
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .card-links a:hover { border-color: var(--border-hover); color: var(--text); }
+
+    /* ── About ── */
+    .about-box {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .about-box p { font-size: 15px; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill {
+      font-size: 12px;
+      padding: 4px 12px;
+      border: 0.5px solid var(--border);
+      border-radius: 99px;
+      color: var(--text-muted);
+      background: var(--bg);
+    }
+
+    /* ── Contact ── */
+    .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .contact-links a {
+      font-size: 13px;
+      padding: 8px 18px;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      background: var(--bg);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .contact-links a:hover { border-color: var(--border-hover); color: var(--text); }
+
+    /* ── Footer ── */
+    footer { padding: 2rem 0; }
+    footer p { font-size: 12px; color: var(--text-hint); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 28px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <span class="logo">Rainal Pashas</span>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Hi, I'm [Your Name]</h1>
+      <p>
+        Civil Engineering student at University of Illinois Urbana-Champaign. I build web apps, data tools, and enjoy
+        solving real problems with code. Currently learning [React / Python / etc.].
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View my projects</a>
+        <a href="resume.pdf" class="btn" target="_blank">Download resume</a>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="section-label">Projects</div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <span class="card-tag tag-blue">Web app</span>
+          <h3>Project One</h3>
+          <p>
+            A short description of what this project does and why you built it.
+            Keep it 2–3 sentences max.
+          </p>
+          <div class="card-links">
+            <a href="https://github.com/yourusername/project-one" target="_blank">GitHub</a>
+            <a href="https://your-live-demo.com" target="_blank">Live demo</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="card-tag tag-teal">Data / ML</span>
+          <h3>Project Two</h3>
+          <p>
+            What problem does it solve? What tech did you use?
+            Mention languages and tools briefly.
+          </p>
+          <div class="card-links">
+            <a href="https://github.com/yourusername/project-two" target="_blank">GitHub</a>
+            <a href="https://your-live-demo.com" target="_blank">Live demo</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <span class="card-tag tag-purple">CLI / Script</span>
+          <h3>Project Three</h3>
+          <p>
+            Even a small utility script counts. Show the impact or the
+            cool part of how it works.
+          </p>
+          <div class="card-links">
+            <a href="https://github.com/yourusername/project-three" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <div class="about-box">
+        <p>
+          I'm a [year] CS student interested in [area: backend / frontend / AI / systems].
+          Outside of class I [hobby or interest]. I'm looking for
+          [internship / research / etc.] opportunities.
+        </p>
+        <div class="skills">
+          <span class="skill">JavaScript</span>
+          <span class="skill">Python</span>
+          <span class="skill">HTML &amp; CSS</span>
+          <span class="skill">Git</span>
+          <span class="skill">SQL</span>
+          <span class="skill">React</span>
+          <!-- Add or remove skills as needed -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="section-label">Contact</div>
+      <div class="contact-links">
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+        <a href="mailto:you@example.com">Email me</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <p>Built with HTML, CSS &amp; JavaScript &mdash; [Your Name] &copy; 2026</p>
+  </footer>
+
+</body>
+</html>
